@@ -6,14 +6,12 @@ skrypt=$0
 if [ "$flaga" = "--date" ] || [ "$flaga" = "-d" ]; then
     date
 elif [ "$flaga" = "--logs" ] || [ "$flaga" = "-l" ]; then
-    # sprawdzamy czy podano liczbe
     if [ -z "$liczba" ]; then
         ile=100
     else
         ile=$liczba
     fi
 
-    # petla do tworzenia plikow
     for (( i=1; i<=ile; i++ ))
     do
         echo "plik: log${i}.txt, utworzony przez: $skrypt, data: $(date)" > "log${i}.txt"
@@ -23,4 +21,8 @@ elif [ "$flaga" = "--help" ] || [ "$flaga" = "-h" ]; then
     echo "--date, -d : wyswietla dzisiejsza date"
     echo "--logs, -l [liczba] : tworzy pliki log (domyslnie 100)"
     echo "--help, -h : wyswietla to menu pomocy"
+elif [ "$flaga" = "--init" ]; then
+    git clone https://github.com/msbhnation1/narzedzia-wbranzy-it-lab4.git
+    export PATH=$PATH:$(pwd)/narzedzia-wbranzy-it-lab4
+    echo "repozytorium sklonowane i dodane do PATH"
 fi
